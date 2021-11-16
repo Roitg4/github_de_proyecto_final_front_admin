@@ -1,12 +1,24 @@
 import React from 'react';
+import {
+  BrowserRouter as Router
+} from 'react-router-dom';
+
 import ReactDOM from 'react-dom';
-import './index.css';
+
+// Obtiene el contexto
+import { UserProvider } from './context/userContext';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+localStorage.removeItem('loginInProcess');
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <Router>
+        <App />
+      </Router>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
