@@ -138,3 +138,19 @@ export const tipoMoneda_get = async ( token ) => {
     return data;
 }
 
+export const adicional_get = async ( token ) => {
+
+    let data = {  }
+
+    await gestorAxios.get('/adicional', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }).then(res => { 
+        
+        data = res.data;
+
+    });
+    console.log(data)
+    return data;
+}

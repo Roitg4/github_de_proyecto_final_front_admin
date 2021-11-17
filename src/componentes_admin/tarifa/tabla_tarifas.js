@@ -14,7 +14,7 @@ import {
 
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { Delete, Visibility, Create, ControlPoint } from '@mui/icons-material';
+import { Delete, Visibility, Create, AddCircle } from '@mui/icons-material';
 import Title from '../_global/title';
 /* import SearchBar from "material-ui-search-bar"; */
 import moment from 'moment';
@@ -188,7 +188,7 @@ export default function TablaAlojamientos() {
                         variant="contained"
                         color="success"
                         onClick={() => openCloseModalCreate()}
-                        startIcon={<ControlPoint />}
+                        startIcon={<AddCircle />}
                     >
                         Crear Tarifa
                     </Button>

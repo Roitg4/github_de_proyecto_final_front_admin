@@ -14,18 +14,18 @@ import {
 
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { Delete, Create, AddCircle } from '@mui/icons-material';
-import Title from '../../_global/title';
-/* import SearchBar from "material-ui-search-bar"; */
+import { Delete, Create, AddCircle, Visibility } from '@mui/icons-material';
+import Title from '../_global/title';
 
-//IMPORTACIONES LOCALES
-import * as extraService from '../../../servicios/extra.service';
+// IMPORTACIONES LOCALES
+import * as extraService from '../../servicios/extra.service';
 import ModalCrear from './modals/modal_crear';
+import ModalMostrarUno from './modals/modal_mostrar-uno';
 import ModalEditar from './modals/modal_editar';
 import ModalEliminar from './modals/modal_eliminar';
-import Snackbar from '../../_global/snackbar';
+import Snackbar from '../_global/snackbar';
 
-export default function TablaEstado() {
+export default function TablaTipo() {
 
     //SNACKBAR
     const valorInicial = {
@@ -42,31 +42,48 @@ export default function TablaEstado() {
         setOpenCreate(!openCreate);
     };
 
+    /* MODAL MOSTRAR UNO*/
+    const [openWathc, setOpenWatch] = useState(false);
+    const [alojamientoAMostrar, setAlojamientoAMostrar] = useState(0);
+
+    const openCloseModalWatchOne = (e) => {
+        if (!openWathc) {
+            const _alojamientoAMostrar = tipousuarios.filter(function (item) {
+                return item.id === parseInt(e.currentTarget.id)
+            })
+            setAlojamientoAMostrar(_alojamientoAMostrar);
+        }
+        setOpenWatch(!openWathc);
+    };
+
+
     /* MODAL EDITAR*/
     const [openEdit, setOpenEdit] = useState(false);
-    const [estadoAEditar, setEstadoAEditar] = useState(0);
+    const [tipoAEditar, setTipoAEditar] = useState(0);
 
     const openCloseModalEdit = (e) => {
 
         if (!openEdit) {
-            const _formaPago = formaPagos.filter(function (item) {
+            const _tipoEditar = tipousuarios.filter(function (item) {
                 return item.id === parseInt(e.currentTarget.id)
             })
-            setEstadoAEditar(_formaPago);
+            setTipoAEditar(_tipoEditar);
         }
+
         setOpenEdit(!openEdit);
     };
 
     /* MODAL ELIMINAR*/
     const [openDelete, setOpenDelete] = useState(false);
-    const [estadoAEliminar, setEstadoAEliminar] = useState(0);
+    const [tipoAEliminar, setTipoAEliminar] = useState(0);
 
     const openCloseModalDelete = (e) => {
 
         if (!openDelete) {
-            const _formaPago = parseInt(e.currentTarget.id);
-            setEstadoAEliminar(_formaPago);
+            const _tipoAEliminar = parseInt(e.currentTarget.id);
+            setTipoAEliminar(_tipoAEliminar);
         }
+
         setOpenDelete(!openDelete);
     };
 
@@ -85,13 +102,12 @@ export default function TablaEstado() {
 
     /* METODO MOSTRAR TODOS */
     let token = localStorage.getItem('token');
-
-    /* ESTADOS ALOJAMIENTO */
-    const [formaPagos, setGuardarFormaPagos] = useState([]);
-    const [formaPagosMostrar, setFormaPagosMostrar] = useState([]);
+    /* ESTADOS TIPO DE USUARIO */
+    const [tipousuarios, setGuardarTiopoUsuarios] = useState([]);
+    const [tipousuarioMostrar, setTipousuarioMostrar] = useState([]);
 
     const [boolCargando, setBoolCargando] = useState(false);
-    /* const [textoBuscar, setTextoBuscar] = useState(""); */
+    /*  const [textoBuscar, setTextoBuscar] = useState(""); */
 
     useEffect(() => {
 
@@ -99,27 +115,27 @@ export default function TablaEstado() {
 
             setBoolCargando(true);
 
-            extraService.formaPago_get(token).then(res => {
+            extraService.adicional_get(token).then(res => {
 
-                setGuardarFormaPagos(res)
-                setFormaPagosMostrar(res)
+                setGuardarTiopoUsuarios(res)
+                setTipousuarioMostrar(res)
             })
         }
-    }, [formaPagos, boolCargando, formaPagosMostrar]);
+    }, [tipousuarios, boolCargando, openSnack, tipousuarioMostrar]);
 
     let emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, formaPagosMostrar.length - page * rowsPerPage);
+        rowsPerPage - Math.min(rowsPerPage, tipousuarioMostrar.length - page * rowsPerPage);
 
-    /* useEffect(() => {
-
-        let items = formaPagos.slice();
-        items = items.filter(item => item.forma_pago.toUpperCase().includes(textoBuscar.toUpperCase()));
-
-        setFormaPagosMostrar(items)
-        emptyRows =
-            rowsPerPage - Math.min(rowsPerPage, items.length - page * rowsPerPage);
-
-    }, [textoBuscar]) */
+    /*     useEffect(() => {
+    
+            let items = tipousuarios.slice();
+            items = items.filter(item => item.tipo_usuario.toUpperCase().includes(textoBuscar.toUpperCase()));
+    
+            setTipousuarioMostrar(items)
+            emptyRows =
+                rowsPerPage - Math.min(rowsPerPage, items.length - page * rowsPerPage);
+    
+        }, [textoBuscar]) */
 
     /* TABLA CEBRA */
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -145,11 +161,11 @@ export default function TablaEstado() {
 
     return (
         <React.Fragment>
-            <Title>Lista de Formas de Pago</Title>
+            <Title>Lista de Adicionales</Title>
 
             <div style={{ width: '100%', height: '400' }}>
                 {/* <Box mr={85} mb={2}>
-                    <SearchBar
+                    <Search
                         placeholder="Barra de búsqueda"
                         value={textoBuscar}
                         onChange={(newValue) => setTextoBuscar(newValue)}
@@ -164,32 +180,39 @@ export default function TablaEstado() {
                         onClick={() => openCloseModalCreate()}
                         startIcon={<AddCircle />}
                     >
-                        Crear Forma de Pago
+                        Crear Adicional
                     </Button>
                 </Box>
             </div>
 
-
-            {formaPagosMostrar.length > 0 ?
+            {tipousuarioMostrar.length > 0 ?
                 <div>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Orden</StyledTableCell>
-                                <StyledTableCell>Forma de Pago</StyledTableCell>
+                                <StyledTableCell>Adicional</StyledTableCell>
                                 <StyledTableCell align="right">Opciones</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        {formaPagosMostrar.length ?
+                        {tipousuarioMostrar.length ?
                             <TableBody>
-                                {formaPagosMostrar.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                {tipousuarioMostrar.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map(tipo =>
                                         <StyledTableRow key={tipo.id}>
                                             <StyledTableCell scope="row">{num++}</StyledTableCell>
-                                            <StyledTableCell >{tipo.forma_pago}</StyledTableCell>
+                                            <StyledTableCell>{tipo.tipo_adicional}</StyledTableCell>
                                             <StyledTableCell align="right">
 
                                                 <Box>
+                                                    <IconButton
+                                                        color="info"
+                                                        id={tipo.id}
+                                                        onClick={
+                                                            (e) => openCloseModalWatchOne(e)}>
+                                                        <Visibility />
+                                                    </IconButton>
+
                                                     <IconButton
                                                         color="primary"
                                                         id={tipo.id}
@@ -230,8 +253,32 @@ export default function TablaEstado() {
                     <Snackbar
                         openSnack={openSnack}
                         setOpenSnack={setOpenSnack}
-                        mensaje={msgSnack} />
+                        mensaje={msgSnack}
+                    />
                     {/*  */}
+
+                    {/* MODAL MOSTRAR UNO */}
+                    <Dialog
+                        open={openWathc}
+                        onClose={(event, reason) => {
+                            if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+                                openCloseModalWatchOne();
+                            }
+                        }}
+                        fullWidth
+                        maxWidth='sm'
+                    >
+                        <ModalMostrarUno
+                            onClose={(event, reason) => {
+                                if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+                                    openCloseModalWatchOne();
+                                }
+                            }}
+                            alojamientoAMostrar={alojamientoAMostrar}
+                        />
+                    </Dialog>
+                    {/*  */}
+
 
                     {/* MODAL EDITAR */}
                     <Dialog
@@ -251,10 +298,9 @@ export default function TablaEstado() {
                                 }
                             }}
                             setBoolCargando={setBoolCargando}
-                            estadoAEditar={estadoAEditar}
+                            tipoAEditar={tipoAEditar}
                             setOpenSnack={setOpenSnack}
                             setMsgSnack={setMsgSnack}
-
                         />
                     </Dialog>
                     {/*  */}
@@ -277,19 +323,17 @@ export default function TablaEstado() {
                                 }
                             }}
                             setBoolCargando={setBoolCargando}
-                            estadoAEliminar={estadoAEliminar}
-                            setEstadoAEliminar={setEstadoAEliminar}
+                            tipoAEliminar={tipoAEliminar}
+                            setTipoAEliminar={setTipoAEliminar}
                             setOpenSnack={setOpenSnack}
-                            setMsgSnack={setMsgSnack}
-
-                        />
+                            setMsgSnack={setMsgSnack} />
                     </Dialog>
                     {/*  */}
 
                     <TablePagination
-                        rowsPerPageOptions={[5]}
+                        rowsPerPageOptions={[5, 10]}
                         component="div"
-                        count={formaPagosMostrar.length}
+                        count={tipousuarioMostrar.length}
                         page={page}
                         onPageChange={handleChangePage}
                         rowsPerPage={rowsPerPage}
@@ -321,8 +365,7 @@ export default function TablaEstado() {
                     }}
                     setBoolCargando={setBoolCargando}
                     setOpenSnack={setOpenSnack}
-                    setMsgSnack={setMsgSnack}
-                />
+                    setMsgSnack={setMsgSnack} />
             </Dialog>
             {/*  */}
 

@@ -23,7 +23,10 @@ import Sub_Alojamientos from './componentes_admin/sub_alojamientos/dashborad';
 
 //TARIFAS
 import Tarifas from './componentes_admin/tarifa/dashborad';
-import Sub_Tarifas from './componentes_admin/sub_alojamientos/dashborad';
+import Sub_Tarifas from './componentes_admin/sub_tarifas/dashborad';
+
+//ADICIONAL
+import Adicional from './componentes_admin/adicional/dashborad';
 
 function App(props) {
 
@@ -84,6 +87,8 @@ function App(props) {
 
                   <>
                     <Route>
+
+                      <Route path="/admin/adicionales" component={Adicional}/>
 
                       <Route path="/admin/sub-tarifas" component={Sub_Tarifas}/>
 

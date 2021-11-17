@@ -108,7 +108,7 @@ export default function ModalCrear(props) {
 
         <form onSubmit={handleSubmit(onFormSubmit)}>
 
-            <Stack m={1} ml={5.8} spacing={2} direction="row">
+            <Stack m={2} mr={3} ml={3} spacing={4} direction="row">
                 <Controller
                     name="fecha_inicio"
                     control={control}

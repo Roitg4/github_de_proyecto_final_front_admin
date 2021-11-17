@@ -14,7 +14,7 @@ import {
 
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { Delete, Create, ControlPoint } from '@mui/icons-material';
+import { Delete, Create, AddCircle } from '@mui/icons-material';
 import Title from '../_global/title';
 
 // IMPORTACIONES LOCALES
@@ -162,7 +162,7 @@ export default function TablaTipo() {
                         variant="contained"
                         color="success"
                         onClick={() => openCloseModalCreate()}
-                        startIcon={<ControlPoint />}
+                        startIcon={<AddCircle />}
                     >
                         Crear Rango
                     </Button>

@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import {
   Dashboard, AssignmentInd, Contacts, HomeWork, MonetizationOn, People, AccountBalance,
-  KingBed, RecentActors
+  KingBed, RecentActors, AddTask
 } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
@@ -62,11 +62,19 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Sub Áreas</ListSubheader>
+
+    <ListItem button component={Link} to="/admin/adicionales">
+      <ListItemIcon>
+        <AddTask />
+      </ListItemIcon>
+      <ListItemText primary="Adicionales" />
+    </ListItem>
+
     <ListItem button component={Link} to="/admin/rango-usuarios">
       <ListItemIcon>
         <RecentActors />
       </ListItemIcon>
-      <ListItemText primary="Rango del Usuario" />
+      <ListItemText primary="Rangos del Usuario" />
     </ListItem>
 
     <ListItem button component={Link} to="/admin/sub-alojamientos">
@@ -80,7 +88,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <AccountBalance />
       </ListItemIcon>
-      <ListItemText primary="Moneda y Pagos" />
+      <ListItemText primary="Monedas y Pagos" />
     </ListItem>
 
   </div>
