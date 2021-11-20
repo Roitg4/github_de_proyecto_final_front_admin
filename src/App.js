@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useUserState, verifyToken, useUserDispatch } from './context/userContext';
-import { useHistory } from "react-router-dom"; //useHistory
+import { useHistory } from "react-router-dom";
 
 import {
   BrowserRouter as Router,
-  Switch, //Switch
+  Switch,
   Route,
-  Redirect //Redirect
+  Redirect
 } from 'react-router-dom';
 
 //MIS COMPONENTES

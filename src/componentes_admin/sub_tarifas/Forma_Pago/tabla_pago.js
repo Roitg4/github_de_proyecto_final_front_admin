@@ -299,6 +299,7 @@ export default function TablaEstado() {
                 :
                 <Box sx={{ width: '100%' }}>
                     <LinearProgress />
+                    <p>Tiempo acabado. Por favor, vuelva a iniciar sesión</p>
                 </Box>
             }
 

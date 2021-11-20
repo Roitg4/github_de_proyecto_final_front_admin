@@ -70,12 +70,12 @@ export const secondaryListItems = (
       <ListItemText primary="Adicionales" />
     </ListItem>
 
-    <ListItem button component={Link} to="/admin/rango-usuarios">
+   {/*  <ListItem button component={Link} to="/admin/rango-usuarios">
       <ListItemIcon>
         <RecentActors />
       </ListItemIcon>
       <ListItemText primary="Rangos del Usuario" />
-    </ListItem>
+    </ListItem> */}
 
     <ListItem button component={Link} to="/admin/sub-alojamientos">
       <ListItemIcon>
