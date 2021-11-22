@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
-import Box from '@mui/material/Box';
+import {
+    Box,
+    Button,
+    DialogTitle,
+    IconButton,
+    Stack,
+    TextField,
+} from '@mui/material';
 import { Print, Close } from '@mui/icons-material';
 
 export default function ModalMostrarUno(props) {
@@ -26,8 +29,20 @@ export default function ModalMostrarUno(props) {
 
         <>
 
-            <DialogTitle>
-                Rango de Usuario
+            <DialogTitle sx={{ fontSize: 'h5.fontSize' }}>
+                Usuario
+                <IconButton
+                    aria-label="close"
+                    onClick={onClose}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <Close />
+                </IconButton>
             </DialogTitle>
 
             <Box m={1} ml={3} mr={3}>
@@ -43,26 +58,25 @@ export default function ModalMostrarUno(props) {
             </Box>
 
             <br />
-            <DialogActions>
-
+            <Stack m={2} mr={3} ml={3} spacing={1} direction="row-reverse">
                 <Button
-                    variant="outlined"
-                    color='info'
-                    disabled
-                    startIcon={<Print />}
-                >
-                    Imprimir
-                </Button>
-
-                <Button
-                    variant="outlined"
+                    variant="contained"
                     color='primary'
                     onClick={() => openCloseModalWatchOne()}
                     endIcon={<Close />}
                 >
                     Cerrar
                 </Button>
-            </DialogActions>
+
+                <Button
+                    variant="contained"
+                    color='info'
+                    disabled
+                    startIcon={<Print />}
+                >
+                    Imprimir
+                </Button>
+            </Stack>
 
         </>
     )

@@ -19,7 +19,9 @@ import MuiDrawer from '@mui/material/Drawer';
 import Dropdawn from '../_global/dropdawn';
 import { mainListItems, secondaryListItems } from '../_global/listitems';
 import Chart from './chart';
+import Chart2 from './chart2';
 import Deposits from './deposits';
+import Deposits2 from './deposits2';
 
 /* import { useHistory } from "react-router-dom"; */
 import { /* useUserDispatch, verifyToken, */ useUserState } from "./../../context/userContext";
@@ -210,7 +212,7 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Chart2 />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -223,7 +225,7 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <Deposits2 />
                 </Paper>
               </Grid>
             </Grid>
