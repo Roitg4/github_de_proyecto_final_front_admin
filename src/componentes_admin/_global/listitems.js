@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import {
   Dashboard, AssignmentInd, Contacts, HomeWork, MonetizationOn, People, AccountBalance,
-  KingBed, RecentActors, AddTask
+  KingBed, AddTask
 } from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
